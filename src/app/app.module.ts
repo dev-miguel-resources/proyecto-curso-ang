@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 //import { PatientComponent } from './pages/patient/patient.component';
 import { LoginComponent } from './login/login.component';
-import { Not404Component } from './pages/not404/not404.component';
+//import { Not404Component } from './pages/not404/not404.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, Not404Component],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
