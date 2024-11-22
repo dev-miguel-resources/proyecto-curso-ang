@@ -8,14 +8,16 @@ import { MaterialModule } from './material/material.module';
 //import { PatientComponent } from './pages/patient/patient.component';
 import { LoginComponent } from './login/login.component';
 //import { Not404Component } from './pages/not404/not404.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
