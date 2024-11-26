@@ -6,14 +6,15 @@ import { MatSort } from '@angular/material/sort';
 import { Patient } from 'src/app/models/dtos/patient';
 import { PatientService } from 'src/app/services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
   standalone: true, // v.14 en adelante
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css'],
-  imports: [MaterialModule, RouterLink],
+  imports: [MaterialModule, RouterLink, RouterOutlet],
 })
 export class PatientComponent implements OnInit {
   dataSource: MatTableDataSource<Patient>;
@@ -43,6 +44,19 @@ export class PatientComponent implements OnInit {
       this.totalElements = data.totalElements;
       this.createTable(data.content);
     });
+
+    // reflejamos los cambios reactivos
+    this.patientService.getPatientChange().subscribe((data) => {
+      this.createTable(data);
+    });
+
+    this.patientService.getMessageChange().subscribe((data) => {
+      this._snackBar.open(data, 'INFO', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+    });
   }
 
   createTable(data: Patient[]) {
@@ -50,12 +64,22 @@ export class PatientComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  delete(idPatient: number) {}
+  delete(idPatient: number) {
+    this.patientService
+      .delete(idPatient)
+      .pipe(switchMap(() => this.patientService.findAll()))
+      .subscribe((data) => {
+        this.patientService.setPatientChange(data);
+        this.patientService.setMessageChange('DELETED');
+      });
+  }
 
   appyFilter(e: Event) {
     const inputElement = e.target as HTMLInputElement;
     this.dataSource.filter = inputElement.value.trim();
   }
 
-  showMore(e: any) {}
+  showMore(e: any) {
+    // pendiente
+  }
 }
