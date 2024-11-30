@@ -23,7 +23,7 @@ export class GenericService<T> {
   }
 
   update(id: number, t: T) {
-    return this.http.put(this.url, `${this.url}/${id}`, t);
+    return this.http.put(`${this.url}/${id}`, t);
   }
 
   delete(id: number) {

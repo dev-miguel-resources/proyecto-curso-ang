@@ -80,6 +80,11 @@ export class PatientComponent implements OnInit {
   }
 
   showMore(e: any) {
-    // pendiente
+    this.patientService
+      .listPageable(e.pageIndex, e.pageSize)
+      .subscribe((data) => {
+        this.totalElements = data.totalElements;
+        this.createTable(data.content);
+      });
   }
 }
