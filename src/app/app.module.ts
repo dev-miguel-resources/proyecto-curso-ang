@@ -9,6 +9,7 @@ import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 //import { Not404Component } from './pages/not404/not404.component';
 import { HttpClientModule } from '@angular/common/http';
+//import { MedicDialogComponent } from './pages/medic/medic-dialog/medic-dialog.component';
 //import { MedicComponent } from './pages/medic/medic.component';
 
 @NgModule({
