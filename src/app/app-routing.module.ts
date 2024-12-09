@@ -2,17 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { Not404Component } from './pages/not404/not404.component';
+import { LayoutComponent } from './pages/layout/layout.component';
 
-// Encargado de registrar rutas externas y a su vez indexa las rutas desacopladas
-// monta la app -> cargue todo el contenido de rutas de los componentes
-// monta el componente inicial, pero solamente él
-// las demás páginas pasan a un estado de pre-carga
-// luego se cargan solo cuando sean visitadas, los otros componentes están en modo espera
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'pages',
+    component: LayoutComponent,
     loadChildren: () =>
       import('./pages/pages.routes').then((r) => r.PagesRoutes),
   },
