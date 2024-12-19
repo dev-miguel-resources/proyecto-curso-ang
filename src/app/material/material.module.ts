@@ -18,11 +18,16 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+} from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
+import { CustomDateAdapter } from './custom-adapter';
 
 @NgModule({
   declarations: [],
@@ -52,6 +57,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatGridListModule,
     MatTabsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }, // definir el locale
+    { provide: DateAdapter, useClass: CustomDateAdapter }, // proveer una lógica personalizada al calendario
+  ],
 })
 export class MaterialModule {}

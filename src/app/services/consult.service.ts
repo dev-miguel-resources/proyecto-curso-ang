@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Consult } from '../models/dtos/consult';
-import { FilterConsult } from '../models/dtos/FilterConsult';
+import { FilterConsult } from '../models/dtos/filterConsult';
 import { ConsultListExam } from '../models/dtos/consultListExam';
 
 @Injectable({
