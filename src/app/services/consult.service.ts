@@ -15,7 +15,7 @@ export class ConsultService {
 
   searchByDates(date1: string, date2: string) {
     return this.http.get<Consult[]>(
-      `${this.url}/search/dates?date=${date1}&date2=${date2}`
+      `${this.url}/search/date?date=${date1}&date2=${date2}`
     );
   }
 

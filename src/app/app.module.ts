@@ -9,6 +9,8 @@ import { MaterialModule } from './material/material.module';
 //import { LoginComponent } from './login/login.component';
 //import { Not404Component } from './pages/not404/not404.component';
 import { HttpClientModule } from '@angular/common/http';
+//import { SearchDialogComponent } from './pages/search/search-dialog/search-dialog.component';
+//import { SearchComponent } from './pages/search/search.component';
 //import { ConsultAutocompleteComponent } from './pages/consult-autocomplete/consult-autocomplete.component';
 //import { ConsultWizardComponent } from './pages/consult-wizard/consult-wizard.component';
 //import { ExamEditComponent } from './pages/exam/exam-edit/exam-edit.component';

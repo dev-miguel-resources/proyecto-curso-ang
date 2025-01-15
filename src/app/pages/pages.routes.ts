@@ -8,6 +8,7 @@ import { ExamEditComponent } from './exam/exam-edit/exam-edit.component';
 import { ExamComponent } from './exam/exam.component';
 import { ConsultAutocompleteComponent } from './consult-autocomplete/consult-autocomplete.component';
 import { ConsultWizardComponent } from './consult-wizard/consult-wizard.component';
+import { SearchComponent } from './search/search.component';
 
 // definimos las rutas internas de la application
 export const PagesRoutes: Routes = [
@@ -65,4 +66,5 @@ export const PagesRoutes: Routes = [
     path: 'consult-wizard',
     component: ConsultWizardComponent,
   },
+  { path: 'search', component: SearchComponent },
 ];
