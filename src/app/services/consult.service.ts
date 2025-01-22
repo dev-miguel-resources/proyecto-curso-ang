@@ -15,7 +15,7 @@ export class ConsultService {
 
   searchByDates(date1: string, date2: string) {
     return this.http.get<Consult[]>(
-      `${this.url}/search/date?date=${date1}&date2=${date2}`
+      `${this.url}/search/dates?date1=${date1}&date2=${date2}`
     );
   }
 
@@ -32,7 +32,7 @@ export class ConsultService {
   }
 
   callProcedureOrFunction() {
-    return this.http.get(`${this.url}/callProcedureNative`);
+    return this.http.get<any>(`${this.url}/callProcedureNative`);
   }
 
   // blob: es un tipo especifico para procesamiento óptimo de archivos en binario: imágenes, pdfs, excel, etc...
@@ -42,5 +42,17 @@ export class ConsultService {
     });
   }
 
-  // save and read file
+  // Files, images
+  saveFile(data: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', data);
+
+    return this.http.post(`${this.url}/saveFile`, formData);
+  }
+
+  readFile(id: number) {
+    return this.http.get(`${this.url}/readFile/${id}`, {
+      responseType: 'blob',
+    });
+  }
 }

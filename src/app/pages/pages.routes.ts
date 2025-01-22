@@ -9,6 +9,7 @@ import { ExamComponent } from './exam/exam.component';
 import { ConsultAutocompleteComponent } from './consult-autocomplete/consult-autocomplete.component';
 import { ConsultWizardComponent } from './consult-wizard/consult-wizard.component';
 import { SearchComponent } from './search/search.component';
+import { ReportComponent } from './report/report.component';
 
 // definimos las rutas internas de la application
 export const PagesRoutes: Routes = [
@@ -67,4 +68,5 @@ export const PagesRoutes: Routes = [
     component: ConsultWizardComponent,
   },
   { path: 'search', component: SearchComponent },
+  { path: 'report', component: ReportComponent },
 ];

@@ -17,7 +17,11 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
-            "allowedCommonJsDependencies": ["moment"],
+            "allowedCommonJsDependencies": [
+              "moment",
+              "pdfjs-dist",
+              "ng2-pdf-viewer"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
