@@ -132,11 +132,50 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  viewReport() {}
+  viewReport() {
+    this.consultService.generateReport().subscribe((data) => {
+      this.pdfSrc = window.URL.createObjectURL(data);
+    });
+  }
 
-  downloadReport() {}
+  downloadReport() {
+    this.consultService.generateReport().subscribe((data) => {
+      const url = window.URL.createObjectURL(data); // crea una url para intervenir el recurso
+      const a = document.createElement('a'); // una etiqueta para manejar la descarga
+      a.setAttribute('style', 'display: none'); // quiero que me oculte el link de la etiqueta
+      document.body.appendChild(a); // vinculo al dom
+      a.href = url; // la referencia de la url temporal
+      a.download = 'report.pdf'; // le defino un nombre al archivo a descargar
+      a.click(); // se descarga mediante un evento click asociado
+    });
+  }
 
-  selectFile(e: any) {}
+  selectFile(e: any) {
+    this.selectedFiles = e.target.files;
+    this.filename = e.target.files[0]?.name;
 
-  upload() {}
+    // Asegurarnos que viene archivo
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
+      const file = this.selectedFiles[0];
+      const reader = new FileReader();
+      // manejar la lectura del archivo
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        this.applySanitizer(base64);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  upload() {
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
+      this.consultService.saveFile(this.selectedFiles.item(0)).subscribe(() => {
+        this._snackBar.open('Imagen enviada!', 'INFO', {
+          duration: 2000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
+      });
+    }
+  }
 }
