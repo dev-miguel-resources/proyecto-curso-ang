@@ -8,7 +8,10 @@ import { MaterialModule } from './material/material.module';
 //import { PatientComponent } from './pages/patient/patient.component';
 //import { LoginComponent } from './login/login.component';
 //import { Not404Component } from './pages/not404/not404.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ServerErrorsInterceptor } from './interceptor/server-errors.interceptor';
 //import { ReportComponent } from './pages/report/report.component';
 //import { SearchDialogComponent } from './pages/search/search-dialog/search-dialog.component';
 //import { SearchComponent } from './pages/search/search.component';
@@ -22,6 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
 //import { MedicDialogComponent } from './pages/medic/medic-dialog/medic-dialog.component';
 //import { MedicComponent } from './pages/medic/medic.component';
 
+export function tokenGetter() {
+  return sessionStorage.getItem(environment.TOKEN_NAME);
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,8 +37,21 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:8080'],
+        disallowedRoutes: ['http://localhost:8080/login/forget'],
+      },
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorsInterceptor,
+      multi: true, // para habilitar si es que hay mas cadenas de intercepción
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

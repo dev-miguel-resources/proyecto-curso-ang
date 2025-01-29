@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import '../../assets/login-animation.js';
 import { NgIf } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
+import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +21,15 @@ export class LoginComponent {
   error: string;
   userDomain: string = 'user@domain.com';
 
-  constructor() {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
-  login() {}
+  login() {
+    this.loginService.login(this.username, this.password).subscribe((data) => {
+      sessionStorage.setItem(environment.TOKEN_NAME, data.jwtToken);
+      //this.router.navigate(['pages/patient']);
+      this.router.navigate(['pages/dashboard']);
+    });
+  }
 
   ngAfterViewInit(): void {
     (window as any).initialize();
